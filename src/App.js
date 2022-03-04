@@ -4,20 +4,25 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+    <div>
+       <h1>Hassan & Sanjay</h1>
+    </div>
+
+    <hr/>
+
+    <div className='email-input'>
+      <h2>We are getting married and are looking forward to sharing out big day with you! Please RSVP for our wedding below</h2>
+      <h3>Please input yout email to RSVP to our wedding events</h3>
+    </div>
+
+    <div>
+      <h2>Event name</h2>
+      <h4>Date and time of event</h4>
+      <h3>Venue</h3>
+      <h3>Number invited</h3>
+    </div>
+
     </div>
   );
 }
