@@ -3,6 +3,24 @@ import { ReactDOM } from 'react-dom';
 
 function Events() {
 
+  const events = [
+    {
+      'id':1,
+      'eventName' : 'Sangeet',
+      'totalAttending' : 5
+    },
+    {
+      'id':2,
+      'eventName' : 'Wedding',
+      'totalAttending' : 6
+    },
+    {
+      'id':3,
+      'eventName' : 'Reception',
+      'totalAttending' : 8
+    }
+  ]
+
   const [email, setEmail] = useState("");
 
   const handleSubmit = (event) =>{
@@ -30,6 +48,32 @@ function Events() {
 
     </div>
 
+    <div className='eventCard'>
+      <h2>Event name</h2>
+      <h4>Date and time of event</h4>
+      <h3>Venue</h3>
+      <h3>Number invited</h3>
+    </div>
+
+    <table className='event-table'>
+      {/* <tr>
+        <th>ID</th>
+        <th>Event Name</th>
+        <th>Total attending</th>
+      </tr> */}
+
+      {events.map((event, index) => (
+        <tr data-index = {index}>
+          <td>{event.id}</td>
+          <td><h1>{event.eventName}</h1></td>
+          <td> Total attending: {event.totalAttending}</td>
+          
+          </tr>
+      ))
+
+      }
+      
+      </table>
 
 
 

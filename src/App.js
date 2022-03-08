@@ -12,10 +12,6 @@ function App() {
       
       <Events />
 
-      <EventCard />
-      <EventCard />
-      <EventCard />
-
       <Footer />
 
     </div>
