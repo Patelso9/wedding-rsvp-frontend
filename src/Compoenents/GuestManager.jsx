@@ -8,15 +8,16 @@ import Paper from '@mui/material/Paper';
 
 const GuestManager = () => {
 
-    const[guestId, setGuestId]= useState('');
-    const[guestName, setGuestName]= useState('');
-    const[guestEmail, setGuestEmail]= useState('');
-    const[totalInvited, setTotalInvited]= useState('');
-    const[attending, setAttending]= useState('');
+    const [guestId, setGuestId]= useState('');
+    const [guestName, setGuestName]= useState('');
+    const [guestEmail, setGuestEmail]= useState('');
+    const [totalInvited, setTotalInvited]= useState('');
+    const [attending, setAttending]= useState('');
     const [rsvpGuests, setRsvpGuests] = useState([]);
-
+    
     const [eventName, setEventName] = useState("");
     const [location, setLocation] = useState("")
+    const [rsvpEvents, setRsvpEvents] = useState([]);
   
   
     const handleSubmitEvent = (e) =>{
@@ -45,30 +46,38 @@ const GuestManager = () => {
     })
     }
 
-    const handleGetGuests = (e) =>{
-        e.preventDefault();
-        const getAllGuests = [{guestId, guestName, guestEmail, totalInvited, attending}]
-        console.log("Guest data: ", guestId, guestName, guestEmail, totalInvited, attending)
-        fetch("http://localhost:8080/rsvpGuest",{
-        method: "GET",
-        headers: {"Content-Type" : "application/json"},
-        body:JSON.stringify(getAllGuests)
-      }).then(() => {
-        console.log("Get all guests")
-      })
-      }
-
     useEffect(()=>{
-        fetch("http://localhost:8080/rsvpGuest/getAll")
+        fetch("http://localhost:8080/guests")
         .then(res=>res.json())
         .then((result)=>{
           setRsvpGuests(result);
         })
       },[]);
 
+    useEffect(()=>{
+        fetch("http://localhost:8080/events")
+        .then(res=>res.json())
+        .then((result)=>{
+          setRsvpEvents(result);
+        })
+      },[]);
+
+
 
   return (
     <div>
+
+    <h2>Welcome to our wedding website!</h2>
+    <h3>Can't wait to celebrate our big day with you!</h3>
+
+    
+
+
+
+    <hr/>
+    <h1>Enter Guest & Event details below</h1>
+
+
         <Box
       component="form"
       sx={{
@@ -158,6 +167,18 @@ const GuestManager = () => {
 
       </div>
 
+      <div>
+
+        <h1>Event List</h1>
+        
+        {rsvpEvents.map(rsvpEvent=>(
+            <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={rsvpEvent.id}>
+                Event {rsvpEvent.id}: {rsvpEvent.eventName}
+                <br />Location: {rsvpEvent.location}
+             </Paper>   
+        ))}
+
+    </div>
       <div>
 
         <h1>Guest List</h1>
