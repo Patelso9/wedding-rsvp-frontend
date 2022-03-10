@@ -15,17 +15,24 @@ const GuestManager = () => {
     const [attending, setAttending]= useState('');
     const [rsvpGuests, setRsvpGuests] = useState([]);
     
+    const [eventId, setEventId] = useState("");
     const [eventName, setEventName] = useState("");
     const [location, setLocation] = useState("")
     const [rsvpEvents, setRsvpEvents] = useState([]);
   
-  
+
+    const handleGetEventId = (e) => {
+      e.preventDefault();
+      
+    }
+
+    // Post new Event 
     const handleSubmitEvent = (e) =>{
       e.preventDefault();
       const rsvpEvent = {eventName, location}
       console.log("Event name: ", eventName, " & Event location: ", location)
       fetch("http://localhost:8080/rsvpEvent",{
-      method: "POST",
+      method: "POST", 
       headers: {"Content-Type" : "application/json"},
       body:JSON.stringify(rsvpEvent)
     }).then(() => {
@@ -33,10 +40,11 @@ const GuestManager = () => {
     })
     }
   
+    // POST new Guest
     const handleSubmitGuest = (e) =>{
       e.preventDefault();
-      const rsvpGuest = {guestName, guestEmail, totalInvited, attending}
-      console.log("Guest data: ", guestName, guestEmail, totalInvited, attending)
+      const rsvpGuest = {guestId, guestName, guestEmail, totalInvited, attending}
+      console.log("Guest data: ", guestId, guestName, guestEmail, totalInvited, attending)
       fetch("http://localhost:8080/guests",{
       method: "POST",
       headers: {"Content-Type" : "application/json"},
@@ -46,6 +54,7 @@ const GuestManager = () => {
     })
     }
 
+    // Get all guests
     useEffect(()=>{
         fetch("http://localhost:8080/guests")
         .then(res=>res.json())
@@ -54,14 +63,15 @@ const GuestManager = () => {
         })
       },[]);
 
+     // Get All Events & guests invited
     useEffect(()=>{
-        fetch("http://localhost:8080/events")
+        fetch(`http://localhost:8080/events`)
         .then(res=>res.json())
         .then((result)=>{
           setRsvpEvents(result);
         })
       },[]);
-
+    
 
 
   return (
@@ -70,8 +80,24 @@ const GuestManager = () => {
     <h2>Welcome to our wedding website!</h2>
     <h3>Can't wait to celebrate our big day with you!</h3>
 
-    
+    <div>
 
+
+    {/* <TextField
+          id="filled-required"
+          label="Find an event by ID"
+          variant="filled"
+          value = {rsvpEvents.id}
+          // onChange = {(e)=>setEventId(e.target.value)}
+          /> */}
+
+      {/* <Button 
+        variant="outlined"
+        onClick={handleFindGuestById}
+      >Submit Event</Button> */}
+
+
+    </div>
 
 
     <hr/>
@@ -105,7 +131,6 @@ const GuestManager = () => {
           onChange = {(e)=>setLocation(e.target.value)}
         />
 
-
       <Button 
         variant="outlined"
         onClick={handleSubmitEvent}
@@ -116,6 +141,19 @@ const GuestManager = () => {
 
       <div>
         <h1>Create Guest</h1>
+
+        <TextField
+          required
+          id="filled-number"
+            label="Event Id"
+            type="number"
+            InputLabelProps={{
+            shrink: true,
+            }}
+            variant="filled"
+          value = {guestId}
+          onChange = {(e)=>setGuestId(e.target.value)}
+        />
  
         <TextField
           required
@@ -173,8 +211,16 @@ const GuestManager = () => {
         
         {rsvpEvents.map(rsvpEvent=>(
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={rsvpEvent.id}>
-                Event {rsvpEvent.id}: {rsvpEvent.eventName}
-                <br />Location: {rsvpEvent.location}
+                Event {rsvpEvent.id}:       {rsvpEvent.eventName}
+                <br />Location:       {rsvpEvent.location}
+                    {rsvpEvent.guests.map(rsvpEvent=>(
+                      <Paper elevation={8} style={{margin:"20px",padding:"19px",textAlign:"left"}} >
+                          Id: {rsvpEvent.id}
+                          <br />Name:       {rsvpEvent.guestName}
+                          <br />Email:       {rsvpEvent.guestEmail}
+                          <br />Total guests invited:       {rsvpEvent.totalInvited}
+                          <br />Able to attend:       {rsvpEvent.attending}
+                      </Paper> ))}
              </Paper>   
         ))}
 
@@ -186,10 +232,10 @@ const GuestManager = () => {
         {rsvpGuests.map(rsvpGuest=>(
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={rsvpGuest.id}>
                 Id: {rsvpGuest.id}
-                <br />Name: {rsvpGuest.guestName}
-                <br />Email: {rsvpGuest.guestEmail}
-                <br />Total guests invited: {rsvpGuest.totalInvited}
-                <br />Able to attend: {rsvpGuest.attending}
+                <br />Name:       {rsvpGuest.guestName}
+                <br />Email:       {rsvpGuest.guestEmail}
+                <br />Total guests invited:       {rsvpGuest.totalInvited}
+                <br />Able to attend:       {rsvpGuest.attending}
              </Paper>   
         ))}
 
