@@ -20,13 +20,21 @@ const GuestManager = () => {
     const [location, setLocation] = useState("")
     const [rsvpEvents, setRsvpEvents] = useState([]);
   
-
-    const handleGetEventId = (e) => {
+    // POST new Guest
+    const handleSubmitGuest = (e) =>{
       e.preventDefault();
-      
+      const rsvpGuest = {guestId, guestName, guestEmail, totalInvited, attending}
+      console.log("Guest data: ", guestId, guestName, guestEmail, totalInvited, attending)
+      fetch("http://localhost:8080/rsvpGuest",{
+      method: "POST",
+      headers: {"Content-Type" : "application/json"},
+      body:JSON.stringify(rsvpGuest)
+    }).then(() => {
+      console.log("New guest added")
+    })
     }
 
-    // Post new Event 
+      //  Post new Event 
     const handleSubmitEvent = (e) =>{
       e.preventDefault();
       const rsvpEvent = {eventName, location}
@@ -37,20 +45,6 @@ const GuestManager = () => {
       body:JSON.stringify(rsvpEvent)
     }).then(() => {
       console.log("New event added")
-    })
-    }
-  
-    // POST new Guest
-    const handleSubmitGuest = (e) =>{
-      e.preventDefault();
-      const rsvpGuest = {guestId, guestName, guestEmail, totalInvited, attending}
-      console.log("Guest data: ", guestId, guestName, guestEmail, totalInvited, attending)
-      fetch("http://localhost:8080/guests",{
-      method: "POST",
-      headers: {"Content-Type" : "application/json"},
-      body:JSON.stringify(rsvpGuest)
-    }).then(() => {
-      console.log("New guest added")
     })
     }
 
@@ -72,37 +66,16 @@ const GuestManager = () => {
         })
       },[]);
     
-
-
+     
   return (
     <div>
+
+    
 
     <h2>Welcome to our wedding website!</h2>
     <h3>Can't wait to celebrate our big day with you!</h3>
 
-    <div>
-
-
-    {/* <TextField
-          id="filled-required"
-          label="Find an event by ID"
-          variant="filled"
-          value = {rsvpEvents.id}
-          // onChange = {(e)=>setEventId(e.target.value)}
-          /> */}
-
-      {/* <Button 
-        variant="outlined"
-        onClick={handleFindGuestById}
-      >Submit Event</Button> */}
-
-
-    </div>
-
-
     <hr/>
-    <h1>Enter Guest & Event details below</h1>
-
 
         <Box
       component="form"
@@ -112,35 +85,9 @@ const GuestManager = () => {
       noValidate
       autoComplete="off"
     >
-        <div>
-        <h1>Create an event</h1>
-        <TextField
-          required
-          id="filled-required"
-          label="Event name"
-          variant="filled"
-          value = {eventName}
-          onChange = {(e)=>setEventName(e.target.value)}
-        />
-        <TextField
-          required
-          id="filled-required"
-          label="Location"
-          variant="filled"
-          value = {location}
-          onChange = {(e)=>setLocation(e.target.value)}
-        />
-
-      <Button 
-        variant="outlined"
-        onClick={handleSubmitEvent}
-      >Submit Event</Button>
-       
-      </div>
-
-
+        
       <div>
-        <h1>Create Guest</h1>
+        <h1>Please RSVP below</h1>
 
         <TextField
           required
@@ -176,7 +123,7 @@ const GuestManager = () => {
         <TextField
           required
           id="filled-number"
-            label="Total invited"
+            label="Total guests attending"
             type="number"
             InputLabelProps={{
             shrink: true,
@@ -195,15 +142,13 @@ const GuestManager = () => {
           value = {attending}
           onChange = {(e)=>setAttending(e.target.value)}
         />
-        
 
-        
+      </div>
+
       <Button 
         variant="outlined"
         onClick={handleSubmitGuest}
       >Submit Guest</Button>
-
-      </div>
 
       <div>
 
@@ -218,16 +163,50 @@ const GuestManager = () => {
                           Id: {rsvpEvent.id}
                           <br />Name:       {rsvpEvent.guestName}
                           <br />Email:       {rsvpEvent.guestEmail}
-                          <br />Total guests invited:       {rsvpEvent.totalInvited}
-                          <br />Able to attend:       {rsvpEvent.attending}
+                          <br />Total guests attending:       {rsvpEvent.totalInvited}
+                          {/* <br />Able to attend:       {rsvpEvent.attending} */}
                       </Paper> ))}
              </Paper>   
         ))}
 
     </div>
+
+    <hr />
+
+    <h1>------ Admin fields below ------</h1>
+
+
+    <div>
+        <h1>Create an event</h1>
+        <TextField
+          required
+          id="filled-required"
+          label="Event name"
+          variant="filled"
+          value = {eventName}
+          onChange = {(e)=>setEventName(e.target.value)}
+        />
+        <TextField
+          required
+          id="filled-required"
+          label="Location"
+          variant="filled"
+          value = {location}
+          onChange = {(e)=>setLocation(e.target.value)}
+        />
+
+      <Button 
+        variant="outlined"
+        onClick={handleSubmitEvent}
+      >Submit Event</Button>
+       
+      </div>
+
+     
+
       <div>
 
-        <h1>Guest List</h1>
+        <h1>View all Guest</h1>
         
         {rsvpGuests.map(rsvpGuest=>(
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={rsvpGuest.id}>
