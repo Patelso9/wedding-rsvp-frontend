@@ -10,7 +10,7 @@ function Header() {
       <div className='header'>
           
     <div className='couple-header'>
-       <h1>Hassan & Sanjay</h1>
+       <h1>Java & Javascript</h1>
     </div>
        
        <h1>3.11.2022</h1>

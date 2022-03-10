@@ -1,23 +1,18 @@
 import './App.css';
-import Events from './EventPage/Events';
-import EventCard from './EventPage/EventCard';
-import Footer from './GlobalAttributes/Footer';
-import Header from './GlobalAttributes/Header';
+
+import GuestManager from './Compoenents/GuestManager';
+import Header from './Compoenents/GlobalAttributes/Header';
+import Footer from './Compoenents/GlobalAttributes/Footer';
 
 function App() {
   return (
     <div className="App">
 
       <Header />
-      
-      <Events />
 
-      <EventCard />
-      <EventCard />
-      <EventCard />
+      <GuestManager />
 
       <Footer />
-
     </div>
   );
 }
