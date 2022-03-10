@@ -1,0 +1,62 @@
+    // const [data, setData] = useState(null);
+  
+    // Handle get id?? 
+    // const handleGetEvent = (e) =>{
+    //   e.preventDefault();
+    //   // const eventDetails = {eventId, eventName, location}
+    //   // console.log("Event name: ", eventName, " & Event location: ", location)
+    //   fetch(`http://localhost:8080/events/${eventId}`,{
+    //   method: "GET", 
+    //   headers: {"Content-Type" : "application/json"},
+    // }).then(() => {
+    //   console.log("Get event by id", eventId)
+    // })
+    // }
+
+ 
+
+     // Get event by ID
+      // useEffect(() => {
+      //   const fetchData = async () => {
+      //     const response = await fetch(`http://localhost:8080/events/${eventId}/`);
+      //     const newData = await response.json();
+      //     setEventId(newData);
+      //   };
+    
+      //   fetchData();
+      // }, []);
+
+      // useEffect(() => {
+      //   const fetchData = async () => {
+      //     const response = await fetch(`http://localhost:8080/events/${props.id}/`);
+      //     const newData = await response.json();
+      //     setData(newData);
+      //   };
+    
+      //   fetchData();
+      // }, [props.id]);
+
+
+
+//           {/* <div>
+
+//     <TextField
+//       required
+//           id="filled-number"
+//             label="Search for Event Id"
+//             type="number"
+//             InputLabelProps={{
+//               shrink: true,
+//               }}
+//               variant="filled"
+//           value = {props.id}
+//           // onChange = {(e)=>setEventId(e.target.value)}
+//         /> */}
+
+// {/* <Button 
+//         variant="outlined"
+//         onClick={handleGetEvent}
+//       >Submit Guest</Button> */}
+// {/* 
+//     </div> */}
+    
