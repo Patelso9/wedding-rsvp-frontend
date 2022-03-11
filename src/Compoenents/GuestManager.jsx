@@ -14,6 +14,7 @@ const GuestManager = () => {
     const [totalInvited, setTotalInvited]= useState('');
     const [attending, setAttending]= useState('');
     const [rsvpGuests, setRsvpGuests] = useState([]);
+
     
     const [eventId, setEventId] = useState("");
     const [eventName, setEventName] = useState("");
@@ -176,11 +177,11 @@ const GuestManager = () => {
                 <br />Location:       {rsvpEvent.location}
                     {rsvpEvent.guests.map(rsvpEvent=>(
                       <Paper elevation={8} style={{margin:"20px",padding:"19px",textAlign:"left"}} >
-                          Id: {rsvpEvent.id}
+                          {/* Id: {rsvpEvent.id} */}
                           <br />Name:       {rsvpEvent.guestName}
                           <br />Email:       {rsvpEvent.guestEmail}
                           <br />Total guests attending:       {rsvpEvent.totalInvited}
-                          {/* <br />Able to attend:       {rsvpEvent.attending} */}
+                          <br />Able to attend:       {rsvpEvent.attending ? "Yes" : "No"}
                       </Paper> ))}
              </Paper>   
         ))}
@@ -226,7 +227,7 @@ const GuestManager = () => {
         
         {rsvpGuests.map(rsvpGuest=>(
             <Paper elevation={6} style={{margin:"10px",padding:"15px",textAlign:"left"}} key={rsvpGuest.id}>
-                Id: {rsvpGuest.id}
+                {/* Id: {rsvpGuest.id} */}
                 <br />Name:       {rsvpGuest.guestName}
                 <br />Email:       {rsvpGuest.guestEmail}
                 <br />Total guests invited:       {rsvpGuest.totalInvited}

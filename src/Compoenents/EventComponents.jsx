@@ -1,6 +1,8 @@
 import React from 'react'
 
 const EventComponents = ({ eventName, location }) => {
+
+
     return (
         <div className="event-container">
                 <div className='event-row'>
