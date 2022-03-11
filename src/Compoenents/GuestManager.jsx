@@ -23,6 +23,19 @@ const GuestManager = () => {
     // POST new Guest
     const handleSubmitGuest = (e) =>{
       e.preventDefault();
+      if(!guestId && !guestName && !guestEmail && !totalInvited && !attending) {
+        alert("Please enter your information.")
+      } else if(!guestId) {
+        alert("Please enter your event id.")
+      } else if(!guestName) {
+        alert("Please enter your name.")
+      } else if(!guestEmail) {
+        alert("Please enter your email.")
+      } else if(!totalInvited) {
+        alert("Please enter total guest attending the event.")
+      } else if(!attending) {
+        alert("Please enter you if will be attending the event.")
+      } else { 
       const rsvpGuest = {guestId, guestName, guestEmail, totalInvited, attending}
       console.log("Guest data: ", guestId, guestName, guestEmail, totalInvited, attending)
       fetch("http://localhost:8080/rsvpGuest",{
@@ -33,10 +46,18 @@ const GuestManager = () => {
       console.log("New guest added")
     })
     }
+  }
 
       //  Post new Event 
     const handleSubmitEvent = (e) =>{
       e.preventDefault();
+      if(!location && !eventName) {
+        alert("Please enter event's name & location!");
+      } else if(!location) {
+        alert("Enter event's location!")
+      } else if (!eventName) {
+        alert("Please enter event's name!")
+      } else {
       const rsvpEvent = {eventName, location}
       console.log("Event name: ", eventName, " & Event location: ", location)
       fetch("http://localhost:8080/rsvpEvent",{
@@ -46,6 +67,7 @@ const GuestManager = () => {
     }).then(() => {
       console.log("New event added")
     })
+  }
     }
 
     // Get all guests
@@ -208,7 +230,7 @@ const GuestManager = () => {
                 <br />Name:       {rsvpGuest.guestName}
                 <br />Email:       {rsvpGuest.guestEmail}
                 <br />Total guests invited:       {rsvpGuest.totalInvited}
-                <br />Able to attend:       {rsvpGuest.attending}
+                <br />Able to attend:       {rsvpGuest.attending ? "Yes" : "No"}
              </Paper>   
         ))}
 
