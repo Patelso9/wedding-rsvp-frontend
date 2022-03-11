@@ -70,12 +70,6 @@ const GuestManager = () => {
   return (
     <div>
 
-    
-
-    <h2>Welcome to our wedding website!</h2>
-    <h3>Can't wait to celebrate our big day with you!</h3>
-
-    <hr/>
 
         <Box
       component="form"
